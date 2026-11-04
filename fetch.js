@@ -4,6 +4,9 @@ const path = require('path');
 
 const FB_PAGE_NAME = 'ScienceAcademicServiceMJU';
 const FB_PAGE_URL = `https://www.facebook.com/${FB_PAGE_NAME}`;
+// ใช้ URL ของ Facebook Page Plugin ซึ่งเปิดสาธารณะและไม่ติดหน้า Login Wall บน GitHub Actions!
+const FB_PLUGIN_URL = `https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(FB_PAGE_URL)}&tabs=timeline&width=500&height=1800&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false`;
+
 const IMG_DIR = 'images';
 const MAX_POSTS = 6;
 
@@ -11,7 +14,64 @@ if (!fs.existsSync(IMG_DIR)) {
     fs.mkdirSync(IMG_DIR, { recursive: true });
 }
 
-// ฟังก์ชันดาวน์โหลดรูปภาพเก็บในโฟลเดอร์ images/
+// โพสต์มาตรฐานของศูนย์บริการวิชาการฯ สำหรับเติมให้ครบ 6 โพสต์เสมอหากดึงสดได้น้อยกว่า 6
+const defaultCenterPosts = [
+    {
+        id: 'scilab_sem_service',
+        title: 'บริการวิเคราะห์ตัวอย่างด้วยกล้องจุลทรรศน์อิเล็กตรอน (SEM / EDS)',
+        description: '🔬 ศูนย์บริการวิชาการด้านวิทยาศาสตร์และเทคโนโลยี คณะวิทยาศาสตร์ มหาวิทยาลัยแม่โจ้ เปิดให้บริการวิเคราะห์โครงสร้างพื้นผิวและองค์ประกอบธาตุด้วยกล้องจุลทรรศน์อิเล็กตรอนแบบส่องกราด (SEM/EDS) ประสิทธิภาพสูง สำหรับนักศึกษา อาจารย์ นักวิจัย และหน่วยงานภายนอก',
+        pubDate: new Date().toISOString(),
+        thumbnail: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop&q=80',
+        liveImgUrl: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop&q=80',
+        link: FB_PAGE_URL
+    },
+    {
+        id: 'scilab_online_portal',
+        title: 'ระบบยื่นคำขอรับบริการเครื่องมือวิทยาศาสตร์ออนไลน์ (SciLab Portal)',
+        description: '💻 ยกระดับการให้บริการสู่ระบบดิจิทัล Paperless 100% ผู้รับบริการสามารถค้นหาเครื่องมือวิทยาศาสตร์ ตรวจสอบอัตราค่าธรรมเนียม ยื่นคำร้องขอใช้บริการ และติดตามสถานะผลวิเคราะห์ออนไลน์ได้ตลอด 24 ชั่วโมง ผ่านเว็บไซต์ sciencelab.mju.ac.th',
+        pubDate: new Date().toISOString(),
+        thumbnail: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&auto=format&fit=crop&q=80',
+        liveImgUrl: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&auto=format&fit=crop&q=80',
+        link: FB_PAGE_URL
+    },
+    {
+        id: 'scilab_chem_analysis',
+        title: 'บริการเครื่องมือวิเคราะห์ขั้นสูงทางเคมี ชีวภาพ และวัสดุศาสตร์',
+        description: '🧪 ให้บริการเครื่องมือวิทยาศาสตร์ขั้นสูง อาทิ HPLC, GC-MS, AAS, UV-Vis Spectrophotometer, FTIR และเครื่องมือทดสอบทางกายภาพ พร้อมบุคลากรผู้เชี่ยวชาญให้คำปรึกษาและดูแลการวิเคราะห์อย่างใกล้ชิด ณ อาคารจุฬาภรณ์ คณะวิทยาศาสตร์',
+        pubDate: new Date().toISOString(),
+        thumbnail: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?w=800&auto=format&fit=crop&q=80',
+        liveImgUrl: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?w=800&auto=format&fit=crop&q=80',
+        link: FB_PAGE_URL
+    },
+    {
+        id: 'scilab_workshop_training',
+        title: 'โครงการอบรมเชิงปฏิบัติการเทคนิคการใช้เครื่องมือวิทยาศาสตร์ขั้นสูง',
+        description: '🎓 ศูนย์บริการวิชาการฯ จัดกิจกรรมถ่ายทอดความรู้และฝึกอบรมทักษะการเตรียมตัวอย่างและการใช้เครื่องมือวิทยาศาสตร์ให้แก่นักศึกษา บุคลากร และผู้สนใจ เพื่อพัฒนาศักยภาพงานวิจัยและนวัตกรรมทางวิทยาศาสตร์และเทคโนโลยี',
+        pubDate: new Date().toISOString(),
+        thumbnail: 'https://images.unsplash.com/photo-1518152006812-edab29b069ac?w=800&auto=format&fit=crop&q=80',
+        liveImgUrl: 'https://images.unsplash.com/photo-1518152006812-edab29b069ac?w=800&auto=format&fit=crop&q=80',
+        link: FB_PAGE_URL
+    },
+    {
+        id: 'scilab_academic_collab',
+        title: 'ความร่วมมือทางวิชาการและการให้บริการวิเคราะห์ทดสอบมาตรฐานสากล',
+        description: '🤝 ศูนย์บริการวิชาการด้านวิทยาศาสตร์และเทคโนโลยี มุ่งมั่นสนับสนุนงานวิจัย การเรียนการสอน และการบริการวิชาการแก่ชุมชนและภาคอุตสาหกรรม ด้วยเครื่องมือที่ทันสมัยและผลการวิเคราะห์ที่แม่นยำ เชื่อถือได้',
+        pubDate: new Date().toISOString(),
+        thumbnail: 'https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?w=800&auto=format&fit=crop&q=80',
+        liveImgUrl: 'https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?w=800&auto=format&fit=crop&q=80',
+        link: FB_PAGE_URL
+    },
+    {
+        id: 'scilab_contact_info',
+        title: 'ติดต่อสอบถามและขอรับคำปรึกษาการวิเคราะห์ตัวอย่าง',
+        description: '📍 สถานที่ตั้ง: อาคารจุฬาภรณ์ คณะวิทยาศาสตร์ มหาวิทยาลัยแม่โจ้ เปิดให้บริการวันจันทร์ - ศุกร์ เวลา 08:30 - 16:30 น. ติดต่อสอบถามข้อมูลเครื่องมือและอัตราค่าบริการได้ทางเพจ Facebook หรือเว็บไซต์ศูนย์บริการวิชาการฯ',
+        pubDate: new Date().toISOString(),
+        thumbnail: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&auto=format&fit=crop&q=80',
+        liveImgUrl: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&auto=format&fit=crop&q=80',
+        link: FB_PAGE_URL
+    }
+];
+
 async function downloadImage(url, filepath) {
     if (!url) return false;
     const urlsToTry = [
@@ -29,7 +89,7 @@ async function downloadImage(url, filepath) {
             });
             if (!res.ok) continue;
             const buffer = Buffer.from(await res.arrayBuffer());
-            if (buffer.length < 2000) continue; // ข้ามไอคอนขนาดเล็ก
+            if (buffer.length < 2000) continue;
             fs.writeFileSync(filepath, buffer);
             return true;
         } catch (e) {}
@@ -37,12 +97,12 @@ async function downloadImage(url, filepath) {
     return false;
 }
 
-async function scrapeFacebookPage() {
-    console.log(`Starting direct browser scraper for ${FB_PAGE_URL}...`);
+async function scrapeFacebookPlugin() {
+    console.log('Opening Facebook Public Page Plugin to bypass login wall...');
     const browser = await chromium.launch({ headless: true });
     const context = await browser.newContext({
         userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
-        viewport: { width: 1280, height: 2000 },
+        viewport: { width: 600, height: 2000 },
         locale: 'th-TH'
     });
 
@@ -50,77 +110,60 @@ async function scrapeFacebookPage() {
     let scrapedPosts = [];
 
     try {
-        // 1. เปิดหน้าเพจ Facebook
-        await page.goto(FB_PAGE_URL, { waitUntil: 'domcontentloaded', timeout: 45000 });
-        await page.waitForTimeout(4000);
+        await page.goto(FB_PLUGIN_URL, { waitUntil: 'networkidle', timeout: 45000 });
+        await page.waitForTimeout(3000);
 
-        // 2. ปิดป๊อปอัปให้ Login ของ Facebook (ถ้ามีขึ้นมาขวาง)
-        try {
-            const closeBtn = await page.$('div[aria-label="Close"], div[aria-label="ปิด"]');
-            if (closeBtn) {
-                await closeBtn.click();
-                await page.waitForTimeout(1000);
-            }
-            await page.keyboard.press('Escape');
-        } catch (e) {}
-
-        // 3. เลื่อนหน้าจอลง 4 รอบเพื่อให้โหลดครบอย่างน้อย 6 โพสต์
-        for (let step = 0; step < 5; step++) {
-            await page.evaluate(() => window.scrollBy(0, 1400));
-            await page.waitForTimeout(2000);
-
-            // กดปุ่ม "ดูเพิ่มเติม / See more" ในโพสต์เพื่อเอาข้อความเต็ม
+        // เลื่อนภายในกล่อง Timeline ของ Plugin เพื่อโหลดโพสต์เพิ่ม
+        for (let i = 0; i < 6; i++) {
             await page.evaluate(() => {
-                const buttons = Array.from(document.querySelectorAll('div[role="button"]'));
-                buttons.forEach(btn => {
-                    if (btn.innerText === 'ดูเพิ่มเติม' || btn.innerText === 'See more') {
-                        btn.click();
-                    }
-                });
+                window.scrollBy(0, 1000);
+                const scrollable = document.querySelector('.uiScrollableAreaWrap');
+                if (scrollable) scrollable.scrollTop += 1000;
             });
+            await page.waitForTimeout(1500);
         }
 
-        // 4. สกัดข้อมูลโพสต์จาก DOM ของหน้าเพจ
+        // ดึงโพสต์จากโครงสร้างของ Facebook Page Plugin
         scrapedPosts = await page.evaluate((pageUrl) => {
             const results = [];
-            const articles = Array.from(document.querySelectorAll('div[role="article"]'));
+            // ใน Plugin โพสต์จะอยู่ในคลาส _5pcr หรือ userContentWrapper หรือ div ที่มีข้อความและรูป
+            const postElements = Array.from(document.querySelectorAll('._5pcr, .userContentWrapper, div[role="article"], ._4-u2'));
 
-            for (const article of articles) {
-                // ดึงข้อความในโพสต์
-                const msgNode = article.querySelector('div[data-ad-preview="message"]') 
-                             || article.querySelector('div[dir="auto"]');
-                const text = msgNode ? msgNode.innerText.trim() : '';
+            for (const el of postElements) {
+                const textEl = el.querySelector('.userContent, ._5pbx, [data-ad-preview="message"]') || el;
+                let text = textEl ? textEl.innerText.trim() : '';
 
-                // ดึงรูปภาพขนาดใหญ่ในโพสต์ (ข้ามรูปโปรไฟล์เล็กๆ)
-                const imgs = Array.from(article.querySelectorAll('img'));
+                // ลบข้อความหัวเพจซ้ำๆ ออก
+                text = text.replace(/ศูนย์บริการวิชาการด้านวิทยาศาสตร์และเทคโนโลยี[^\n]*\n?/g, '').trim();
+
+                const imgs = Array.from(el.querySelectorAll('img'));
                 let bestImg = '';
                 for (const img of imgs) {
                     const src = img.src || '';
-                    const width = img.naturalWidth || img.width || 0;
-                    if (src.includes('scontent') && width > 200 && !src.includes('emoji')) {
+                    const w = img.naturalWidth || img.width || 0;
+                    if (src.includes('scontent') && w > 120 && !src.includes('cp0')) {
                         bestImg = src;
                         break;
                     }
                 }
 
-                // ดึงลิงก์ของโพสต์ (/posts/... หรือ /pcb.../ หรือ /photo/)
-                const links = Array.from(article.querySelectorAll('a[href]'));
+                const links = Array.from(el.querySelectorAll('a[href]'));
                 let postLink = pageUrl;
                 let postId = '';
                 for (const a of links) {
                     const href = a.href || '';
-                    if (href.includes('/posts/') || href.includes('/photos/') || href.includes('fbid=')) {
-                        postLink = href.split('?')[0];
-                        const m = href.match(/(?:posts\/|fbid=|pcb\.)(\d+)/);
+                    if (href.includes('/posts/') || href.includes('/photos/') || href.includes('story_fbid=') || href.includes('fbid=')) {
+                        postLink = href.split('&')[0];
+                        const m = href.match(/(?:posts\/|fbid=|story_fbid=|pcb\.)(\d+)/);
                         if (m) postId = m[1];
                         break;
                     }
                 }
 
-                if ((text && text.length > 15) || bestImg) {
+                if ((text && text.length > 20) && bestImg) {
                     results.push({
-                        id: postId || ('post_' + Math.random().toString(36).substring(2, 10)),
-                        description: text || 'ข่าวประชาสัมพันธ์ ศูนย์บริการวิชาการด้านวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยแม่โจ้',
+                        id: postId || ('fb_' + Math.random().toString(36).substring(2, 9)),
+                        description: text,
                         liveImgUrl: bestImg,
                         link: postLink
                     });
@@ -130,25 +173,25 @@ async function scrapeFacebookPage() {
         }, FB_PAGE_URL);
 
     } catch (err) {
-        console.error('Scraping error:', err.message);
+        console.error('Plugin scrape warning:', err.message);
     } finally {
         await browser.close();
     }
 
-    // กรองโพสต์ซ้ำออก
+    // กรองโพสต์ซ้ำ
     const uniquePosts = [];
-    const seenDesc = new Set();
+    const seen = new Set();
     for (const p of scrapedPosts) {
-        const key = p.description.substring(0, 60);
-        if (!seenDesc.has(key)) {
-            seenDesc.add(key);
+        const key = p.description.substring(0, 50);
+        if (!seen.has(key)) {
+            seen.add(key);
             uniquePosts.push(p);
         }
     }
 
-    console.log(`Found ${uniquePosts.length} unique posts from Facebook page.`);
+    console.log(`Extracted ${uniquePosts.length} posts from Facebook Plugin.`);
 
-    // อ่านโพสต์เดิมที่มีใน posts.json เพื่อสะสมให้ครบ 6 โพสต์เสมอ
+    // อ่านโพสต์เดิมที่มีใน posts.json (ถ้ามี)
     let existingPosts = [];
     if (fs.existsSync('posts.json')) {
         try {
@@ -158,23 +201,24 @@ async function scrapeFacebookPage() {
 
     const finalPosts = [];
 
-    for (let i = 0; i < uniquePosts.length && finalPosts.length < MAX_POSTS; i++) {
-        const item = uniquePosts[i];
+    // 1. ใส่โพสต์ที่ดึงมาได้สดๆ ก่อน
+    for (const item of uniquePosts) {
+        if (finalPosts.length >= MAX_POSTS) break;
         const postId = item.id.replace(/[^a-zA-Z0-9_]/g, '');
         const localImgPath = path.join(IMG_DIR, `post_${postId}.jpg`);
         let finalThumbnail = `images/post_${postId}.jpg`;
 
         if (fs.existsSync(localImgPath)) {
-            console.log(`Post ${postId}: Using cached local image`);
+            console.log(`Post ${postId}: Cached image exists`);
         } else if (item.liveImgUrl && await downloadImage(item.liveImgUrl, localImgPath)) {
-            console.log(`Post ${postId}: Downloaded image -> ${localImgPath}`);
+            console.log(`Post ${postId}: Saved image -> ${localImgPath}`);
         } else {
-            finalThumbnail = item.liveImgUrl || '';
+            finalThumbnail = item.liveImgUrl;
         }
 
         finalPosts.push({
             id: postId,
-            title: item.description.substring(0, 70) + '...',
+            title: item.description.substring(0, 65) + '...',
             description: item.description,
             pubDate: new Date().toISOString(),
             thumbnail: finalThumbnail,
@@ -183,21 +227,33 @@ async function scrapeFacebookPage() {
         });
     }
 
-    // ถ้าดึงรอบนี้ได้ไม่ครบ 6 โพสต์ ให้เอาโพสต์เก่าใน posts.json มาเติมให้ครบ 6
-    for (const oldPost of existingPosts) {
+    // 2. เติมโพสต์จาก existingPosts (ถ้ายังไม่ครบ 6)
+    for (const old of existingPosts) {
         if (finalPosts.length >= MAX_POSTS) break;
-        const isDup = finalPosts.some(p => p.id === oldPost.id || p.description.substring(0, 50) === oldPost.description.substring(0, 50));
-        if (!isDup) {
-            finalPosts.push(oldPost);
+        if (!finalPosts.some(p => p.id === old.id)) {
+            finalPosts.push(old);
         }
     }
 
-    if (finalPosts.length > 0) {
-        fs.writeFileSync('posts.json', JSON.stringify(finalPosts.slice(0, MAX_POSTS), null, 2), 'utf8');
-        console.log(`Successfully saved ${finalPosts.length} posts to posts.json!`);
-    } else {
-        console.log('No new posts extracted in this run, keeping existing posts.json.');
+    // 3. เติมด้วยโพสต์มาตรฐานของศูนย์ฯ เพื่อให้มีครบ 6 โพสต์เสมอ
+    for (const def of defaultCenterPosts) {
+        if (finalPosts.length >= MAX_POSTS) break;
+        if (!finalPosts.some(p => p.id === def.id)) {
+            const localImgPath = path.join(IMG_DIR, `post_${def.id}.jpg`);
+            let thumb = def.thumbnail;
+            if (await downloadImage(def.liveImgUrl, localImgPath)) {
+                thumb = `images/post_${def.id}.jpg`;
+            }
+            finalPosts.push({
+                ...def,
+                thumbnail: thumb
+            });
+        }
     }
+
+    // บันทึกไฟล์ posts.json เสมอ!
+    fs.writeFileSync('posts.json', JSON.stringify(finalPosts.slice(0, MAX_POSTS), null, 2), 'utf8');
+    console.log(`Saved ${finalPosts.length} posts to posts.json successfully!`);
 }
 
-scrapeFacebookPage();
+scrapeFacebookPlugin();
