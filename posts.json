@@ -1,0 +1,56 @@
+[
+  {
+    "id": "scilab_sem_service",
+    "title": "บริการวิเคราะห์ตัวอย่างด้วยกล้องจุลทรรศน์อิเล็กตรอน (SEM / EDS)",
+    "description": "🔬 ศูนย์บริการวิชาการด้านวิทยาศาสตร์และเทคโนโลยี คณะวิทยาศาสตร์ มหาวิทยาลัยแม่โจ้ เปิดให้บริการวิเคราะห์โครงสร้างพื้นผิวและองค์ประกอบธาตุด้วยกล้องจุลทรรศน์อิเล็กตรอนแบบส่องกราด (SEM/EDS) ประสิทธิภาพสูง สำหรับนักศึกษา อาจารย์ นักวิจัย และหน่วยงานภายนอก",
+    "pubDate": "2026-11-04T06:59:22.021Z",
+    "thumbnail": "images/post_scilab_sem_service.jpg",
+    "liveImgUrl": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop&q=80",
+    "link": "https://www.facebook.com/ScienceAcademicServiceMJU"
+  },
+  {
+    "id": "scilab_online_portal",
+    "title": "ระบบยื่นคำขอรับบริการเครื่องมือวิทยาศาสตร์ออนไลน์ (SciLab Portal)",
+    "description": "💻 ยกระดับการให้บริการสู่ระบบดิจิทัล Paperless 100% ผู้รับบริการสามารถค้นหาเครื่องมือวิทยาศาสตร์ ตรวจสอบอัตราค่าธรรมเนียม ยื่นคำร้องขอใช้บริการ และติดตามสถานะผลวิเคราะห์ออนไลน์ได้ตลอด 24 ชั่วโมง ผ่านเว็บไซต์ sciencelab.mju.ac.th",
+    "pubDate": "2026-11-04T06:59:22.021Z",
+    "thumbnail": "images/post_scilab_online_portal.jpg",
+    "liveImgUrl": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&auto=format&fit=crop&q=80",
+    "link": "https://www.facebook.com/ScienceAcademicServiceMJU"
+  },
+  {
+    "id": "scilab_chem_analysis",
+    "title": "บริการเครื่องมือวิเคราะห์ขั้นสูงทางเคมี ชีวภาพ และวัสดุศาสตร์",
+    "description": "🧪 ให้บริการเครื่องมือวิทยาศาสตร์ขั้นสูง อาทิ HPLC, GC-MS, AAS, UV-Vis Spectrophotometer, FTIR และเครื่องมือทดสอบทางกายภาพ พร้อมบุคลากรผู้เชี่ยวชาญให้คำปรึกษาและดูแลการวิเคราะห์อย่างใกล้ชิด ณ อาคารจุฬาภรณ์ คณะวิทยาศาสตร์",
+    "pubDate": "2026-11-04T06:59:22.021Z",
+    "thumbnail": "images/post_scilab_chem_analysis.jpg",
+    "liveImgUrl": "https://images.unsplash.com/photo-1579154204601-01588f351e67?w=800&auto=format&fit=crop&q=80",
+    "link": "https://www.facebook.com/ScienceAcademicServiceMJU"
+  },
+  {
+    "id": "scilab_workshop_training",
+    "title": "โครงการอบรมเชิงปฏิบัติการเทคนิคการใช้เครื่องมือวิทยาศาสตร์ขั้นสูง",
+    "description": "🎓 ศูนย์บริการวิชาการฯ จัดกิจกรรมถ่ายทอดความรู้และฝึกอบรมทักษะการเตรียมตัวอย่างและการใช้เครื่องมือวิทยาศาสตร์ให้แก่นักศึกษา บุคลากร และผู้สนใจ เพื่อพัฒนาศักยภาพงานวิจัยและนวัตกรรมทางวิทยาศาสตร์และเทคโนโลยี",
+    "pubDate": "2026-11-04T06:59:22.021Z",
+    "thumbnail": "images/post_scilab_workshop_training.jpg",
+    "liveImgUrl": "https://images.unsplash.com/photo-1518152006812-edab29b069ac?w=800&auto=format&fit=crop&q=80",
+    "link": "https://www.facebook.com/ScienceAcademicServiceMJU"
+  },
+  {
+    "id": "scilab_academic_collab",
+    "title": "ความร่วมมือทางวิชาการและการให้บริการวิเคราะห์ทดสอบมาตรฐานสากล",
+    "description": "🤝 ศูนย์บริการวิชาการด้านวิทยาศาสตร์และเทคโนโลยี มุ่งมั่นสนับสนุนงานวิจัย การเรียนการสอน และการบริการวิชาการแก่ชุมชนและภาคอุตสาหกรรม ด้วยเครื่องมือที่ทันสมัยและผลการวิเคราะห์ที่แม่นยำ เชื่อถือได้",
+    "pubDate": "2026-11-04T06:59:22.021Z",
+    "thumbnail": "https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?w=800&auto=format&fit=crop&q=80",
+    "liveImgUrl": "https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?w=800&auto=format&fit=crop&q=80",
+    "link": "https://www.facebook.com/ScienceAcademicServiceMJU"
+  },
+  {
+    "id": "scilab_contact_info",
+    "title": "ติดต่อสอบถามและขอรับคำปรึกษาการวิเคราะห์ตัวอย่าง",
+    "description": "📍 สถานที่ตั้ง: อาคารจุฬาภรณ์ คณะวิทยาศาสตร์ มหาวิทยาลัยแม่โจ้ เปิดให้บริการวันจันทร์ - ศุกร์ เวลา 08:30 - 16:30 น. ติดต่อสอบถามข้อมูลเครื่องมือและอัตราค่าบริการได้ทางเพจ Facebook หรือเว็บไซต์ศูนย์บริการวิชาการฯ",
+    "pubDate": "2026-11-04T06:59:22.021Z",
+    "thumbnail": "images/post_scilab_contact_info.jpg",
+    "liveImgUrl": "https://images.unsplash.com/photo-1562774053-701939374585?w=800&auto=format&fit=crop&q=80",
+    "link": "https://www.facebook.com/ScienceAcademicServiceMJU"
+  }
+]
