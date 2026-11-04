@@ -1,12 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 
-// ลิงก์ RSS จริงของเพจ ScienceAcademicServiceMJU
 const RSS_URL = 'https://fetchrss.com/feed/1x2Ksn3K62qo1xOV35C1wG7W.rss';
 const FB_PAGE_URL = 'https://www.facebook.com/ScienceAcademicServiceMJU';
 const IMG_DIR = 'images';
-const MAX_ARCHIVE = 20; // เก็บสะสมประวัติข่าวไว้สูงสุด 20 ข่าว (หน้าเว็บจะโชว์ 6 ข่าวบนสุด)
+const MAX_ARCHIVE = 20;
 
+// สร้างโฟลเดอร์ images/ อัตโนมัติหากยังไม่มี
 if (!fs.existsSync(IMG_DIR)) {
     fs.mkdirSync(IMG_DIR, { recursive: true });
 }
@@ -20,6 +20,7 @@ function cleanFacebookUrl(rawUrl, postId) {
     return fixed;
 }
 
+// ฟังก์ชันดาวน์โหลดรูปข่าวลงโฟลเดอร์ images/
 async function downloadImage(url, filepath) {
     if (!url) return false;
     const urlsToTry = [
@@ -51,12 +52,12 @@ async function downloadImage(url, filepath) {
 }
 
 async function run() {
-    console.log('Fetching latest posts from FetchRSS...');
+    console.log('Checking FetchRSS for new Facebook posts...');
     const res = await fetch(RSS_URL, {
         headers: { 'User-Agent': 'Mozilla/5.0 (compatible; SciLabMJUFeedBot/1.0)' }
     });
     if (!res.ok) {
-        console.log('RSS unreachable, keeping existing posts.json.');
+        console.log('RSS unreachable, keeping existing files.');
         return;
     }
     const xml = await res.text();
@@ -65,7 +66,7 @@ async function run() {
     const items = [...xml.matchAll(itemRegex)];
 
     if (items.length === 0) {
-        console.log('No items found in RSS.');
+        console.log('No items in RSS, keeping existing files.');
         return;
     }
 
@@ -100,7 +101,7 @@ async function run() {
         let finalThumbnail = `images/post_${postId}.jpg`;
 
         if (fs.existsSync(localImgPath)) {
-            console.log(`Post ${postId}: Image already saved`);
+            console.log(`Post ${postId}: Image already saved in images/`);
         } else if (imgUrl && await downloadImage(imgUrl, localImgPath)) {
             console.log(`Post ${postId}: Downloaded new image -> ${localImgPath}`);
         } else if (imgUrl) {
@@ -109,7 +110,7 @@ async function run() {
 
         fetchedPosts.push({
             id: postId,
-            title: title || 'ข่าวประชาสัมพันธ์ ศูนย์บริการวิชาการฯ',
+            title: title || 'ข่าวสารศูนย์บริการวิชาการฯ',
             description: cleanText || title,
             pubDate: pubDate,
             thumbnail: finalThumbnail,
@@ -118,17 +119,15 @@ async function run() {
         });
     }
 
-    // 1. อ่านคลังข่าวเก่าใน posts.json (ตัดข่าวจำลอง scilab_ ทิ้ง)
+    // โหลดข่าวเก่าที่เคยสะสมไว้ใน posts.json
     let archivePosts = [];
     if (fs.existsSync('posts.json')) {
         try {
-            const parsed = JSON.parse(fs.readFileSync('posts.json', 'utf8'));
-            archivePosts = parsed.filter(p => !String(p.id).startsWith('scilab_'));
-        } catch (e) {}
+            archivePosts = JSON.parse(fs.readFileSync('posts.json', 'utf8'));
+        } catch (e) { archivePosts = []; }
     }
 
-    // 2. เอาข่าวใหม่วางไว้หน้าสุด แล้วตามด้วยข่าวเก่าที่มีอยู่แล้ว (ไม่ซ้ำ ID)
-    // เมื่อมีโพสต์ใหม่มา โพสต์เก่าจะถูกเลื่อนลำดับลงไปเรื่อยๆ อัตโนมัติ!
+    // เอาข่าวใหม่ขึ้นก่อน แล้วดันข่าวเก่าเลื่อนลงไปเรื่อยๆ (ไม่ซ้ำ ID)
     const combinedMap = new Map();
     fetchedPosts.forEach(p => combinedMap.set(p.id, p));
     archivePosts.forEach(p => {
@@ -140,7 +139,7 @@ async function run() {
     const updatedArchive = Array.from(combinedMap.values()).slice(0, MAX_ARCHIVE);
 
     fs.writeFileSync('posts.json', JSON.stringify(updatedArchive, null, 2), 'utf8');
-    console.log(`Updated rolling archive! Total stored: ${updatedArchive.length} posts (Displaying top 6).`);
+    console.log(`Saved ${updatedArchive.length} posts to posts.json and images to images/ folder!`);
 }
 
 run();
