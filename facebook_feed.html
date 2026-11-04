@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
-    <title>ข่าวประชาสัมพันธ์ 4 ข่าวล่าสุด - ศูนย์บริการวิชาการฯ คณะวิทยาศาสตร์ ม.แม่โจ้</title>
+    <title>ไฮไลท์ - ศูนย์บริการวิชาการฯ คณะวิทยาศาสตร์ ม.แม่โจ้</title>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap');
@@ -24,68 +24,38 @@
             overflow-x: hidden;
         }
 
-        /* 1. แถบหัวข้อข่าวประชาสัมพันธ์ */
+        /* 1. หัวข้อ "ไฮไลท์" แบบคลีน ไม่มีไอคอน */
         .section-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 14px;
-            padding: 10px 14px;
-            background: linear-gradient(90deg, #fff7ed 0%, #ffffff 100%);
-            border: 1px solid #fed7aa;
-            border-left: 5px solid #ea580c;
-            border-radius: 10px;
-        }
-
-        .section-title-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-icon {
-            width: 34px;
-            height: 34px;
-            background: #ea580c;
-            color: #ffffff;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            flex-shrink: 0;
-            box-shadow: 0 3px 8px rgba(234, 88, 12, 0.25);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #fed7aa;
         }
 
         .section-title {
-            font-size: 16.5px;
-            font-weight: 700;
+            font-size: 20px;
+            font-weight: 800;
             color: #1e293b;
+            border-left: 4px solid #ea580c;
+            padding-left: 10px;
             line-height: 1.2;
-        }
-
-        .section-subtitle {
-            font-size: 11.5px;
-            color: #64748b;
-            margin-top: 1px;
         }
 
         .btn-view-all {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
             background: #ffffff;
             color: #ea580c;
             border: 1px solid #fdba74;
-            padding: 5px 12px;
-            border-radius: 20px;
+            padding: 4px 12px;
+            border-radius: 6px;
             font-size: 12px;
             font-weight: 700;
             text-decoration: none;
             transition: all 0.2s ease;
-            white-space: nowrap;
         }
 
         .btn-view-all:hover {
@@ -94,36 +64,36 @@
             border-color: #ea580c;
         }
 
-        /* 2. ตารางการ์ดข่าว 4 คอลัมน์ (แถวเดียว 4 ข่าวล่าสุด) */
-        .feed-container-4 {
+        /* 2. ตารางการ์ด 6 ข่าว เรียงแถวเดียว (6 คอลัมน์) */
+        .feed-container-6-row {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
             width: 100%;
         }
 
-        .news-card-4 {
+        .news-card-item {
             width: 100%;
             background: #ffffff;
             border: 1px solid #fed7aa;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             text-decoration: none;
             color: inherit;
-            transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
         }
 
-        .news-card-4:hover {
-            transform: translateY(-4px);
+        .news-card-item:hover {
+            transform: translateY(-3px);
             border-color: #ea580c;
-            box-shadow: 0 10px 18px rgba(234, 88, 12, 0.14);
+            box-shadow: 0 8px 15px rgba(234, 88, 12, 0.14);
         }
 
-        /* กรอบรูปภาพสัดส่วนจัตุรัส 1:1 พอดีกับรูป Facebook เต็มการ์ด ไม่ตัดหัวไม่ตัดขอบ */
+        /* กรอบรูปจัตุรัส ขนาดเล็กกะทัดรัดตามความกว้างของ 1 ใน 6 คอลัมน์ */
         .card-img-wrapper {
             width: 100%;
             aspect-ratio: 1 / 1;
@@ -138,79 +108,112 @@
             object-fit: cover;
             object-position: center top;
             display: block;
-            transition: transform 0.35s ease;
+            transition: transform 0.3s ease;
         }
 
-        .news-card-4:hover .card-img {
+        .news-card-item:hover .card-img {
             transform: scale(1.04);
         }
 
-        /* ป้ายวันที่สีส้ม */
+        /* ป้ายวันที่สีส้ม (ไม่มีไอคอน) */
         .author-date-badge {
             position: absolute;
             z-index: 3;
-            bottom: 8px;
-            right: 8px;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 10.5px;
+            bottom: 6px;
+            right: 6px;
+            font-size: 9.5px;
             color: #ffffff;
             background-color: rgba(234, 88, 12, 0.92);
-            backdrop-filter: blur(4px);
-            padding: 2.5px 9px;
-            border-radius: 20px;
+            padding: 2px 7px;
+            border-radius: 12px;
             font-weight: 600;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         }
 
         .card-content {
-            padding: 12px 13px;
+            padding: 8px 10px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             background: #ffffff;
-            min-height: 115px;
+            min-height: 92px;
         }
 
         .card-text {
-            font-size: 12px;
+            font-size: 11px;
             color: #334155;
-            line-height: 1.48;
+            line-height: 1.42;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .read-more {
-            font-size: 11.5px;
+            font-size: 10.5px;
             color: #ea580c;
             font-weight: 700;
             display: inline-block;
         }
 
-        /* รองรับหน้าจอ Tablet / iPad (2 คอลัมน์) */
-        @media (max-width: 900px) {
-            .feed-container-4 {
-                grid-template-columns: repeat(2, 1fr);
+        /* การ์ดช่องที่ 6 กรณีมี 5 ข่าว */
+        .promo-card-compact {
+            background: linear-gradient(145deg, #ea580c 0%, #c2410c 100%);
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .promo-title {
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.35;
+            margin-bottom: 6px;
+        }
+
+        .promo-desc {
+            font-size: 10.5px;
+            color: #ffedd5;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .promo-info {
+            background: rgba(0, 0, 0, 0.18);
+            border-radius: 6px;
+            padding: 6px 8px;
+            font-size: 10px;
+            color: #fff7ed;
+            line-height: 1.45;
+            margin-bottom: 8px;
+        }
+
+        .promo-btn {
+            background: #ffffff;
+            color: #ea580c;
+            font-size: 10.5px;
+            font-weight: 700;
+            text-align: center;
+            padding: 6px 8px;
+            border-radius: 6px;
+        }
+
+        /* รองรับหน้าจอ Tablet (3 คอลัมน์) */
+        @media (max-width: 1024px) {
+            .feed-container-6-row {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
-        /* รองรับหน้าจอมือถือ (Mobile - 1 คอลัมน์) */
-        @media (max-width: 560px) {
-            .section-header {
-                padding: 10px 12px;
-            }
-            .btn-view-all {
-                width: 100%;
-                justify-content: center;
-            }
-            .feed-container-4 {
-                grid-template-columns: 1fr;
-                gap: 12px;
+        /* รองรับหน้าจอมือถือ (2 คอลัมน์กะทัดรัด) */
+        @media (max-width: 600px) {
+            .feed-container-6-row {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
             }
         }
     </style>
@@ -218,30 +221,24 @@
 
 <body>
 
-    <!-- 1. หัวข้อข่าวประชาสัมพันธ์ -->
+    <!-- 1. หัวข้อ ไฮไลท์ (ไม่มีไอคอน) -->
     <div class="section-header">
-        <div class="section-title-group">
-        
-            <div>
-                <h2 class="section-title">ไฮไลท์</h2>
-                <p class="section-subtitle">อัปเดตข่าวสาร ศูนย์บริการวิชาการด้านวิทยาศาสตร์และเทคโนโลยีฯ </p>
-            </div>
-        </div>
+        <h2 class="section-title">ไฮไลท์</h2>
         <a href="https://www.facebook.com/ScienceAcademicServiceMJU" target="_blank" class="btn-view-all">
-            
+            <span>ดูทั้งหมด</span>
             <span>➔</span>
         </a>
     </div>
 
-    <!-- 2. ตารางแสดงการ์ดข่าว 4 ช่อง (แถวเดียว) -->
-    <div class="feed-container-4" id="feed-container"></div>
+    <!-- 2. ตารางแสดงการ์ด 6 ข่าว เรียงแถวเดียว -->
+    <div class="feed-container-6-row" id="feed-container"></div>
 
     <script>
         const fbPageUrl = 'https://www.facebook.com/ScienceAcademicServiceMJU';
         const defaultFallbackImg = 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&auto=format&fit=crop&q=80';
 
         function formatFullThaiDate(dateInput) {
-            if (!dateInput) return 'ข่าวล่าสุด';
+            if (!dateInput) return 'ล่าสุด';
             const d = new Date(dateInput);
             if (isNaN(d.getTime())) return dateInput;
             return d.toLocaleDateString('th-TH', {
@@ -265,8 +262,7 @@
         }
 
         function renderFeeds(items) {
-            // ตัดเอา 4 ข่าวล่าสุดมาแสดงในแถวเดียว
-            const posts = (items || []).slice(0, 4);
+            const posts = (items || []).slice(0, 6);
             const container = document.getElementById('feed-container');
             container.innerHTML = '';
 
@@ -277,21 +273,40 @@
                 const targetLink = fixFbLink(post.link);
 
                 container.innerHTML += `
-            <a href="${targetLink}" target="_blank" class="news-card-4">
+            <a href="${targetLink}" target="_blank" class="news-card-item">
               <div class="card-img-wrapper">
                 <img class="card-img" src="${imgSrc}" referrerpolicy="no-referrer" alt="Card Image"
                      onerror="if(!this.dataset.triedLive && '${liveFallback}' !== '${defaultFallbackImg}'){this.dataset.triedLive='1';this.src='${liveFallback}';}else{this.onerror=null;this.src='${defaultFallbackImg}';}">
-                <span class="author-date-badge">📅 ${fullDateStr}</span>
+                <span class="author-date-badge">${fullDateStr}</span>
               </div>
               <div class="card-content">
                 <p class="card-text">${post.description}</p>
                 <div>
-                  <span class="read-more">อ่านรายละเอียดเพิ่มเติม ➔</span>
+                  <span class="read-more">อ่านเพิ่มเติม ➔</span>
                 </div>
               </div>
             </a>
           `;
             });
+
+            if (posts.length < 6) {
+                container.innerHTML += `
+            <a href="${fbPageUrl}" target="_blank" class="news-card-item promo-card-compact">
+              <div>
+                <h3 class="promo-title">ศูนย์บริการวิชาการด้านวิทยาศาสตร์และเทคโนโลยี</h3>
+                <p class="promo-desc">คณะวิทยาศาสตร์ มหาวิทยาลัยแม่โจ้</p>
+                <div class="promo-info">
+                  อาคารจุฬาภรณ์ คณะวิทยาศาสตร์<br>
+                  จันทร์ - ศุกร์ (08:30 - 16:30 น.)<br>
+                  โทร. 053-873000
+                </div>
+              </div>
+              <div class="promo-btn">
+                เพจ Facebook ➔
+              </div>
+            </a>
+          `;
+            }
         }
 
         fetch('posts.json?t=' + Date.now())
