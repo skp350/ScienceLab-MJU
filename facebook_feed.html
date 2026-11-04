@@ -19,20 +19,20 @@
 
         body {
             background-color: transparent;
-            padding: 4px 0 10px 0;
+            padding: 4px 2px 10px 2px;
             margin: 0;
             overflow-x: hidden;
         }
 
-        /* ==========================================
-           1. แถบหัวข้อข่าวประชาสัมพันธ์ (Section Header)
-           ========================================== */
+        /* 1. แถบหัวข้อข่าวประชาสัมพันธ์ */
         .section-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
             margin-bottom: 16px;
-            padding: 12px 18px;
+            padding: 12px 16px;
             background: linear-gradient(90deg, #fff7ed 0%, #ffffff 100%);
             border: 1px solid #fed7aa;
             border-left: 5px solid #ea580c;
@@ -55,6 +55,7 @@
             align-items: center;
             justify-content: center;
             font-size: 18px;
+            flex-shrink: 0;
             box-shadow: 0 4px 10px rgba(234, 88, 12, 0.25);
         }
 
@@ -84,6 +85,7 @@
             font-weight: 700;
             text-decoration: none;
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
 
         .btn-view-all:hover {
@@ -92,20 +94,17 @@
             border-color: #ea580c;
         }
 
-        /* ==========================================
-           2. ตารางการ์ดข่าว 6 ช่อง (News Grid)
-           ========================================== */
+        /* 2. ตารางการ์ดข่าว 6 ช่อง (CSS Grid Responsive) */
         .feed-container-6 {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 14px;
             width: 100%;
-            margin-bottom: 26px;
+            margin-bottom: 24px;
         }
 
         .news-card-6 {
-            width: calc(33.333% - 10px);
+            width: 100%;
             background: #ffffff;
             border: 1px solid #fed7aa;
             border-radius: 14px;
@@ -128,7 +127,7 @@
 
         .card-img-wrapper {
             width: 100%;
-            height: 260px;
+            height: 255px;
             background: #fff7ed;
             overflow: hidden;
             position: relative;
@@ -161,7 +160,6 @@
             margin-bottom: 8px;
         }
 
-        /* วันที่สีส้ม รูปแบบเต็ม */
         .author-date {
             display: inline-flex;
             align-items: center;
@@ -193,12 +191,12 @@
             display: inline-block;
         }
 
-        /* การ์ดพิเศษช่องที่ 6 (อุดช่องว่างกรณีมี 5 ข่าว) */
+        /* การ์ดพิเศษช่องที่ 6 */
         .promo-card-6 {
             background: linear-gradient(145deg, #ea580c 0%, #c2410c 100%);
             color: #ffffff;
             border: none;
-            padding: 28px 22px;
+            padding: 24px 20px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -211,7 +209,7 @@
             position: absolute;
             right: -15px;
             bottom: -20px;
-            font-size: 130px;
+            font-size: 120px;
             opacity: 0.12;
             pointer-events: none;
         }
@@ -224,74 +222,67 @@
             font-weight: 700;
             padding: 4px 12px;
             border-radius: 20px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             width: fit-content;
         }
 
         .promo-title {
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 800;
             line-height: 1.35;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .promo-desc {
-            font-size: 13px;
+            font-size: 12.5px;
             color: #ffedd5;
-            line-height: 1.6;
-            margin-bottom: 20px;
+            line-height: 1.55;
+            margin-bottom: 14px;
         }
 
         .promo-info-box {
             background: rgba(0, 0, 0, 0.18);
             border-radius: 12px;
-            padding: 12px 14px;
+            padding: 10px 12px;
             font-size: 12px;
             color: #fff7ed;
-            line-height: 1.6;
-            margin-bottom: 16px;
+            line-height: 1.55;
+            margin-bottom: 14px;
         }
 
         .promo-btn {
             background: #ffffff;
             color: #ea580c;
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 700;
             text-align: center;
-            padding: 11px 16px;
+            padding: 10px 14px;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             transition: all 0.2s;
         }
 
-        .promo-card-6:hover .promo-btn {
-            background: #fff7ed;
-            transform: translateY(-2px);
-        }
-
-        /* ==========================================
-           3. แถบขั้นตอนการขอรับบริการ 4 ขั้นตอน (Workflow)
-           ========================================== */
+        /* 3. แถบขั้นตอนการขอรับบริการ 4 ขั้นตอน */
         .workflow-box {
             background: linear-gradient(180deg, #ffffff 0%, #fff7ed 100%);
             border: 1px solid #fed7aa;
             border-radius: 16px;
-            padding: 20px 22px;
+            padding: 18px 20px;
         }
 
         .workflow-header {
             text-align: center;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
         .workflow-header h3 {
-            font-size: 17px;
+            font-size: 16.5px;
             font-weight: 700;
             color: #1e293b;
         }
 
         .workflow-header p {
-            font-size: 12.5px;
+            font-size: 12px;
             color: #64748b;
             margin-top: 2px;
         }
@@ -299,26 +290,25 @@
         .workflow-steps {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
+            gap: 12px;
         }
 
         .step-item {
             background: #ffffff;
             border: 1px solid #ffedd5;
             border-radius: 12px;
-            padding: 14px 12px;
+            padding: 14px 10px;
             text-align: center;
-            position: relative;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
         }
 
         .step-num {
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             background: #ea580c;
             color: #ffffff;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13.5px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -327,7 +317,7 @@
         }
 
         .step-title {
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 700;
             color: #1e293b;
             margin-bottom: 4px;
@@ -339,13 +329,57 @@
             line-height: 1.4;
         }
 
-        @media (max-width: 768px) {
-            .news-card-6 {
-                width: 100%;
-                height: auto;
+        /* รองรับหน้าจอ Tablet / iPad (2 คอลัมน์) */
+        @media (max-width: 900px) {
+            .feed-container-6 {
+                grid-template-columns: repeat(2, 1fr);
             }
             .workflow-steps {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* รองรับหน้าจอมือถือ (Mobile - 1 คอลัมน์) */
+        @media (max-width: 600px) {
+            .section-header {
+                padding: 10px 12px;
+            }
+            .section-title {
+                font-size: 15.5px;
+            }
+            .section-subtitle {
+                font-size: 11px;
+            }
+            .btn-view-all {
+                width: 100%;
+                justify-content: center;
+                padding: 6px 12px;
+            }
+            .feed-container-6 {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .news-card-6 {
+                height: auto;
+                min-height: 360px;
+            }
+            .card-img-wrapper {
+                height: 220px;
+            }
+            .workflow-steps {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .step-item {
+                display: flex;
+                align-items: center;
+                text-align: left;
+                gap: 12px;
+                padding: 12px 14px;
+            }
+            .step-num {
+                margin: 0;
+                flex-shrink: 0;
             }
         }
     </style>
@@ -371,7 +405,7 @@
     <!-- 2. ตารางแสดงการ์ดข่าว 6 ช่อง -->
     <div class="feed-container-6" id="feed-container"></div>
 
-    <!-- 3. แถบขั้นตอนการขอใช้บริการ 4 ขั้นตอน ปิดท้ายหน้าเว็บ -->
+    <!-- 3. แถบขั้นตอนการขอใช้บริการ 4 ขั้นตอน -->
     <div class="workflow-box">
         <div class="workflow-header">
             <h3>⚡ ขั้นตอนการขอรับบริการเครื่องมือวิทยาศาสตร์ (Service Workflow)</h3>
@@ -380,23 +414,31 @@
         <div class="workflow-steps">
             <div class="step-item">
                 <div class="step-num">1</div>
-                <div class="step-title">ค้นหาเครื่องมือ</div>
-                <div class="step-desc">ตรวจสอบรายการเครื่องมือและอัตราค่าบริการในแคตตาล็อก</div>
+                <div>
+                    <div class="step-title">ค้นหาเครื่องมือ</div>
+                    <div class="step-desc">ตรวจสอบรายการเครื่องมือและอัตราค่าบริการในแคตตาล็อก</div>
+                </div>
             </div>
             <div class="step-item">
                 <div class="step-num">2</div>
-                <div class="step-title">ยื่นคำขอออนไลน์</div>
-                <div class="step-desc">กรอกแบบฟอร์มคำขอใช้บริการและเลือกวันเวลาที่ต้องการ</div>
+                <div>
+                    <div class="step-title">ยื่นคำขอออนไลน์</div>
+                    <div class="step-desc">กรอกแบบฟอร์มคำขอใช้บริการและเลือกวันเวลาที่ต้องการ</div>
+                </div>
             </div>
             <div class="step-item">
                 <div class="step-num">3</div>
-                <div class="step-title">ส่งตัวอย่าง / ใช้งาน</div>
-                <div class="step-desc">นำส่งตัวอย่างวิเคราะห์หรือเข้าใช้งานเครื่องมือตามนัดหมาย</div>
+                <div>
+                    <div class="step-title">ส่งตัวอย่าง / ใช้งาน</div>
+                    <div class="step-desc">นำส่งตัวอย่างวิเคราะห์หรือเข้าใช้งานเครื่องมือตามนัดหมาย</div>
+                </div>
             </div>
             <div class="step-item">
                 <div class="step-num">4</div>
-                <div class="step-title">ชำระเงินและรับผล</div>
-                <div class="step-desc">ชำระค่าธรรมเนียมและติดตามรับผลการวิเคราะห์</div>
+                <div>
+                    <div class="step-title">ชำระเงินและรับผล</div>
+                    <div class="step-desc">ชำระค่าธรรมเนียมและติดตามรับผลการวิเคราะห์</div>
+                </div>
             </div>
         </div>
     </div>
@@ -405,7 +447,6 @@
         const fbPageUrl = 'https://www.facebook.com/ScienceAcademicServiceMJU';
         const defaultFallbackImg = 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&auto=format&fit=crop&q=80';
 
-        // แปลงวันที่เป็นรูปแบบเต็มภาษาไทย เช่น "29 ตุลาคม 2569"
         function formatFullThaiDate(dateInput) {
             if (!dateInput) return 'ข่าวประชาสัมพันธ์ล่าสุด';
             const d = new Date(dateInput);
@@ -462,7 +503,6 @@
           `;
             });
 
-            // ถ้ามีข่าวแค่ 5 ช่อง ให้เติมช่องที่ 6 ด้วยการ์ด Official Facebook & Contact เพื่อไม่ให้แหว่ง
             if (posts.length < 6) {
                 container.innerHTML += `
             <a href="${fbPageUrl}" target="_blank" class="news-card-6 promo-card-6">
