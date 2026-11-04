@@ -112,7 +112,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 330px;
+            height: 320px;
             text-decoration: none;
             color: inherit;
             transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
@@ -124,42 +124,27 @@
             box-shadow: 0 10px 18px rgba(234, 88, 12, 0.14);
         }
 
-        /* กรอบรูปภาพ: จัดกึ่งกลางเป๊ะ + พื้นหลังเบลอรองรับรูปทุกสัดส่วนไม่ให้โดนตัดขาด */
+        /* กรอบรูปภาพ: เต็มความกว้างของการ์ด 100% */
         .card-img-wrapper {
             width: 100%;
-            height: 200px;
-            background: #fff7ed;
+            height: 190px;
+            background: #f8fafc;
             overflow: hidden;
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        /* พื้นหลังเบลอเติมเต็มด้านข้างกรณีรูปเป็นแนวตั้ง/จัตุรัส */
-        .card-img-blur-bg {
-            position: absolute;
-            inset: -10px;
-            background-size: cover;
-            background-position: center center;
-            filter: blur(12px) brightness(0.92);
-            opacity: 0.45;
-            z-index: 1;
-        }
-
-        /* รูปหลักแสดงเต็มตรงกลาง (contain / center) ไม่ตัดหัว ไม่ตัดข้อความ */
+        /* รูปเต็มการ์ดด้านซ้าย-ขวา และ Crop ตรงกลางของรูป (ตัดบน-ล่างออกเท่ากัน) */
         .card-img {
-            position: relative;
-            z-index: 2;
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             object-position: center center;
+            display: block;
             transition: transform 0.35s ease;
         }
 
         .news-card-6:hover .card-img {
-            transform: scale(1.03);
+            transform: scale(1.04);
         }
 
         /* ป้ายวันที่สีส้ม */
@@ -188,7 +173,6 @@
             flex-direction: column;
             justify-content: space-between;
             background: #ffffff;
-            z-index: 3;
         }
 
         .card-text {
@@ -302,7 +286,7 @@
             }
             .news-card-6 {
                 height: auto;
-                min-height: 310px;
+                min-height: 300px;
             }
         }
     </style>
@@ -370,7 +354,6 @@
                 container.innerHTML += `
             <a href="${targetLink}" target="_blank" class="news-card-6">
               <div class="card-img-wrapper">
-                <div class="card-img-blur-bg" style="background-image: url('${imgSrc}');"></div>
                 <img class="card-img" src="${imgSrc}" referrerpolicy="no-referrer" alt="Card Image"
                      onerror="if(!this.dataset.triedLive && '${liveFallback}' !== '${defaultFallbackImg}'){this.dataset.triedLive='1';this.src='${liveFallback}';}else{this.onerror=null;this.src='${defaultFallbackImg}';}">
                 <span class="author-date-badge">📅 ${fullDateStr}</span>
