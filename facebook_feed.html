@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
-    <title>ข่าวประชาสัมพันธ์ - ศูนย์บริการวิชาการฯ คณะวิทยาศาสตร์ ม.แม่โจ้</title>
+    <title>ข่าวประชาสัมพันธ์ 4 ข่าวล่าสุด - ศูนย์บริการวิชาการฯ คณะวิทยาศาสตร์ ม.แม่โจ้</title>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap');
@@ -31,7 +31,7 @@
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 10px;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             padding: 10px 14px;
             background: linear-gradient(90deg, #fff7ed 0%, #ffffff 100%);
             border: 1px solid #fed7aa;
@@ -94,15 +94,15 @@
             border-color: #ea580c;
         }
 
-        /* 2. ตารางการ์ดข่าว 6 ช่อง */
-        .feed-container-6 {
+        /* 2. ตารางการ์ดข่าว 4 คอลัมน์ (แถวเดียว 4 ข่าวล่าสุด) */
+        .feed-container-4 {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 14px;
             width: 100%;
         }
 
-        .news-card-6 {
+        .news-card-4 {
             width: 100%;
             background: #ffffff;
             border: 1px solid #fed7aa;
@@ -112,38 +112,36 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 350px;
             text-decoration: none;
             color: inherit;
             transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
         }
 
-        .news-card-6:hover {
+        .news-card-4:hover {
             transform: translateY(-4px);
             border-color: #ea580c;
             box-shadow: 0 10px 18px rgba(234, 88, 12, 0.14);
         }
 
-        /* กรอบรูปภาพ */
+        /* กรอบรูปภาพสัดส่วนจัตุรัส 1:1 พอดีกับรูป Facebook เต็มการ์ด ไม่ตัดหัวไม่ตัดขอบ */
         .card-img-wrapper {
             width: 100%;
-            height: 225px;
-            background: #f8fafc;
+            aspect-ratio: 1 / 1;
+            background: #fff7ed;
             overflow: hidden;
             position: relative;
         }
 
-        /* เต็มความกว้างการ์ด + โฟกัสส่วนบนถึงกลาง (top 12%) ป้องกันหัวคนถูกตัด */
         .card-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center 12%;
+            object-position: center top;
             display: block;
             transition: transform 0.35s ease;
         }
 
-        .news-card-6:hover .card-img {
+        .news-card-4:hover .card-img {
             transform: scale(1.04);
         }
 
@@ -167,12 +165,13 @@
         }
 
         .card-content {
-            padding: 10px 13px;
+            padding: 12px 13px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             background: #ffffff;
+            min-height: 115px;
         }
 
         .card-text {
@@ -183,7 +182,7 @@
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
         }
 
         .read-more {
@@ -193,86 +192,15 @@
             display: inline-block;
         }
 
-        /* การ์ดพิเศษช่องที่ 6 (ล็อกอยู่ประจำช่องที่ 6 เสมอ) */
-        .promo-card-6 {
-            background: linear-gradient(145deg, #ea580c 0%, #c2410c 100%);
-            color: #ffffff;
-            border: none;
-            padding: 22px 18px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .promo-card-6::after {
-            content: '🔬';
-            position: absolute;
-            right: -10px;
-            bottom: -15px;
-            font-size: 110px;
-            opacity: 0.12;
-            pointer-events: none;
-        }
-
-        .promo-badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.22);
-            color: #ffffff;
-            font-size: 10px;
-            font-weight: 700;
-            padding: 3px 10px;
-            border-radius: 20px;
-            margin-bottom: 10px;
-            width: fit-content;
-        }
-
-        .promo-title {
-            font-size: 17px;
-            font-weight: 800;
-            line-height: 1.35;
-            margin-bottom: 8px;
-        }
-
-        .promo-desc {
-            font-size: 12px;
-            color: #ffedd5;
-            line-height: 1.5;
-            margin-bottom: 12px;
-        }
-
-        .promo-info-box {
-            background: rgba(0, 0, 0, 0.18);
-            border-radius: 8px;
-            padding: 10px 12px;
-            font-size: 11.5px;
-            color: #fff7ed;
-            line-height: 1.55;
-            margin-bottom: 12px;
-        }
-
-        .promo-btn {
-            background: #ffffff;
-            color: #ea580c;
-            font-size: 12px;
-            font-weight: 700;
-            text-align: center;
-            padding: 9px 12px;
-            border-radius: 8px;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-            transition: all 0.2s;
-        }
-
         /* รองรับหน้าจอ Tablet / iPad (2 คอลัมน์) */
         @media (max-width: 900px) {
-            .feed-container-6 {
+            .feed-container-4 {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
         /* รองรับหน้าจอมือถือ (Mobile - 1 คอลัมน์) */
-        @media (max-width: 600px) {
+        @media (max-width: 560px) {
             .section-header {
                 padding: 10px 12px;
             }
@@ -280,13 +208,9 @@
                 width: 100%;
                 justify-content: center;
             }
-            .feed-container-6 {
+            .feed-container-4 {
                 grid-template-columns: 1fr;
                 gap: 12px;
-            }
-            .news-card-6 {
-                height: auto;
-                min-height: 320px;
             }
         }
     </style>
@@ -309,8 +233,8 @@
         </a>
     </div>
 
-    <!-- 2. ตารางแสดงการ์ดข่าว 6 ช่อง -->
-    <div class="feed-container-6" id="feed-container"></div>
+    <!-- 2. ตารางแสดงการ์ดข่าว 4 ช่อง (แถวเดียว) -->
+    <div class="feed-container-4" id="feed-container"></div>
 
     <script>
         const fbPageUrl = 'https://www.facebook.com/ScienceAcademicServiceMJU';
@@ -341,8 +265,8 @@
         }
 
         function renderFeeds(items) {
-            // ดึง 5 ข่าวล่าสุดมาแสดงในช่องที่ 1-5 (และช่องที่ 6 เป็นกล่องเวลาทำการและข้อมูลศูนย์ฯ เสมอ)
-            const posts = (items || []).slice(0, 5);
+            // ตัดเอา 4 ข่าวล่าสุดมาแสดงในแถวเดียว
+            const posts = (items || []).slice(0, 4);
             const container = document.getElementById('feed-container');
             container.innerHTML = '';
 
@@ -353,7 +277,7 @@
                 const targetLink = fixFbLink(post.link);
 
                 container.innerHTML += `
-            <a href="${targetLink}" target="_blank" class="news-card-6">
+            <a href="${targetLink}" target="_blank" class="news-card-4">
               <div class="card-img-wrapper">
                 <img class="card-img" src="${imgSrc}" referrerpolicy="no-referrer" alt="Card Image"
                      onerror="if(!this.dataset.triedLive && '${liveFallback}' !== '${defaultFallbackImg}'){this.dataset.triedLive='1';this.src='${liveFallback}';}else{this.onerror=null;this.src='${defaultFallbackImg}';}">
@@ -368,25 +292,6 @@
             </a>
           `;
             });
-
-            // ช่องที่ 6: ล็อกการ์ดข้อมูลศูนย์ฯ และเวลาทำการไว้ตลอดเวลา (ไม่หายไปเมื่อมีโพสต์ใหม่)
-            container.innerHTML += `
-            <a href="${fbPageUrl}" target="_blank" class="news-card-6 promo-card-6">
-              <div>
-                <span class="promo-badge">✨ OFFICIAL PAGE</span>
-                <h3 class="promo-title">ศูนย์บริการวิชาการด้านวิทยาศาสตร์และเทคโนโลยี</h3>
-                <p class="promo-desc">คณะวิทยาศาสตร์ มหาวิทยาลัยแม่โจ้ ให้บริการวิเคราะห์ทดสอบและเครื่องมือวิทยาศาสตร์ขั้นสูงเพื่องานวิจัยและการศึกษา</p>
-                <div class="promo-info-box">
-                  📍 อาคารจุฬาภรณ์ คณะวิทยาศาสตร์<br>
-                  ⏰ จันทร์ - ศุกร์ (08:30 - 16:30 น.)<br>
-                  ☎️ โทร. 053-873000
-                </div>
-              </div>
-              <div class="promo-btn">
-                ติดตามข่าวสารทั้งหมดบน Facebook ➔
-              </div>
-            </a>
-          `;
         }
 
         fetch('posts.json?t=' + Date.now())
