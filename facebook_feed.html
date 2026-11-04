@@ -19,69 +19,69 @@
 
         body {
             background-color: transparent;
-            padding: 4px 2px 10px 2px;
+            padding: 2px 2px 8px 2px;
             margin: 0;
             overflow-x: hidden;
         }
 
-        /* 1. แถบหัวข้อข่าวประชาสัมพันธ์ */
+        /* 1. แถบหัวข้อข่าวประชาสัมพันธ์ (กะทัดรัดขึ้น) */
         .section-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 10px;
-            margin-bottom: 16px;
-            padding: 12px 16px;
+            margin-bottom: 12px;
+            padding: 10px 14px;
             background: linear-gradient(90deg, #fff7ed 0%, #ffffff 100%);
             border: 1px solid #fed7aa;
             border-left: 5px solid #ea580c;
-            border-radius: 12px;
+            border-radius: 10px;
         }
 
         .section-title-group {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .section-icon {
-            width: 38px;
-            height: 38px;
+            width: 34px;
+            height: 34px;
             background: #ea580c;
             color: #ffffff;
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 16px;
             flex-shrink: 0;
-            box-shadow: 0 4px 10px rgba(234, 88, 12, 0.25);
+            box-shadow: 0 3px 8px rgba(234, 88, 12, 0.25);
         }
 
         .section-title {
-            font-size: 18px;
+            font-size: 16.5px;
             font-weight: 700;
             color: #1e293b;
             line-height: 1.2;
         }
 
         .section-subtitle {
-            font-size: 12px;
+            font-size: 11.5px;
             color: #64748b;
-            margin-top: 2px;
+            margin-top: 1px;
         }
 
         .btn-view-all {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             background: #ffffff;
             color: #ea580c;
             border: 1px solid #fdba74;
-            padding: 7px 14px;
+            padding: 5px 12px;
             border-radius: 20px;
-            font-size: 12.5px;
+            font-size: 12px;
             font-weight: 700;
             text-decoration: none;
             transition: all 0.2s ease;
@@ -94,26 +94,26 @@
             border-color: #ea580c;
         }
 
-        /* 2. ตารางการ์ดข่าว 6 ช่อง (CSS Grid Responsive) */
+        /* 2. ตารางการ์ดข่าว 6 ช่อง (ย่อขนาดความสูงลง 35%) */
         .feed-container-6 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 14px;
             width: 100%;
-            margin-bottom: 24px;
+            margin-bottom: 18px;
         }
 
         .news-card-6 {
             width: 100%;
             background: #ffffff;
             border: 1px solid #fed7aa;
-            border-radius: 14px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 430px;
+            height: 285px; /* ย่อลงจาก 430px เหลือ 285px กะทัดรัดพอดีตา */
             text-decoration: none;
             color: inherit;
             transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
@@ -122,12 +122,12 @@
         .news-card-6:hover {
             transform: translateY(-4px);
             border-color: #ea580c;
-            box-shadow: 0 12px 22px rgba(234, 88, 12, 0.14);
+            box-shadow: 0 10px 18px rgba(234, 88, 12, 0.14);
         }
 
         .card-img-wrapper {
             width: 100%;
-            height: 255px;
+            height: 155px; /* ย่อความสูงรูปจาก 260px เหลือ 155px (ทรง 16:9 สวยงาม) */
             background: #fff7ed;
             overflow: hidden;
             position: relative;
@@ -137,66 +137,64 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: top center;
+            object-position: center 20%;
             transition: transform 0.35s ease;
         }
 
         .news-card-6:hover .card-img {
-            transform: scale(1.03);
+            transform: scale(1.04);
+        }
+
+        /* ป้ายวันที่สีส้ม วางซ้อนมุมขวาล่างของรูปเพื่อประหยัดพื้นที่ */
+        .author-date-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 10.5px;
+            color: #ffffff;
+            background-color: rgba(234, 88, 12, 0.92);
+            backdrop-filter: blur(4px);
+            padding: 2.5px 9px;
+            border-radius: 20px;
+            font-weight: 600;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         }
 
         .card-content {
-            padding: 12px 14px;
+            padding: 10px 13px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        .author-info {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            margin-bottom: 8px;
-        }
-
-        .author-date {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 11.5px;
-            color: #ea580c;
-            background-color: #fff7ed;
-            border: 1px solid #fed7aa;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-weight: 700;
-        }
-
         .card-text {
-            font-size: 12.5px;
+            font-size: 12px;
             color: #334155;
-            line-height: 1.5;
+            line-height: 1.48;
             display: -webkit-box;
-            -webkit-line-clamp: 4;
+            -webkit-line-clamp: 3; /* แสดง 3 บรรทัดกระชับ */
             -webkit-box-orient: vertical;
             overflow: hidden;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .read-more {
-            font-size: 12px;
+            font-size: 11.5px;
             color: #ea580c;
             font-weight: 700;
             display: inline-block;
         }
 
-        /* การ์ดพิเศษช่องที่ 6 */
+        /* การ์ดพิเศษช่องที่ 6 (ปรับขนาดความสูง 285px เท่ากันเป๊ะ) */
         .promo-card-6 {
             background: linear-gradient(145deg, #ea580c 0%, #c2410c 100%);
             color: #ffffff;
             border: none;
-            padding: 24px 20px;
+            padding: 16px 18px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -207,126 +205,126 @@
         .promo-card-6::after {
             content: '🔬';
             position: absolute;
-            right: -15px;
-            bottom: -20px;
-            font-size: 120px;
+            right: -10px;
+            bottom: -15px;
+            font-size: 95px;
             opacity: 0.12;
             pointer-events: none;
         }
 
         .promo-badge {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.22);
             color: #ffffff;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
-            padding: 4px 12px;
+            padding: 2.5px 10px;
             border-radius: 20px;
-            margin-bottom: 12px;
+            margin-bottom: 6px;
             width: fit-content;
         }
 
         .promo-title {
-            font-size: 19px;
+            font-size: 15.5px;
             font-weight: 800;
-            line-height: 1.35;
-            margin-bottom: 10px;
+            line-height: 1.3;
+            margin-bottom: 6px;
         }
 
         .promo-desc {
-            font-size: 12.5px;
+            font-size: 11.5px;
             color: #ffedd5;
-            line-height: 1.55;
-            margin-bottom: 14px;
+            line-height: 1.45;
+            margin-bottom: 8px;
         }
 
         .promo-info-box {
             background: rgba(0, 0, 0, 0.18);
-            border-radius: 12px;
-            padding: 10px 12px;
-            font-size: 12px;
+            border-radius: 8px;
+            padding: 7px 10px;
+            font-size: 11px;
             color: #fff7ed;
-            line-height: 1.55;
-            margin-bottom: 14px;
+            line-height: 1.45;
+            margin-bottom: 8px;
         }
 
         .promo-btn {
             background: #ffffff;
             color: #ea580c;
-            font-size: 12.5px;
+            font-size: 11.5px;
             font-weight: 700;
             text-align: center;
-            padding: 10px 14px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 7px 12px;
+            border-radius: 8px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
             transition: all 0.2s;
         }
 
-        /* 3. แถบขั้นตอนการขอรับบริการ 4 ขั้นตอน */
+        /* 3. แถบขั้นตอนการขอรับบริการ 4 ขั้นตอน (กะทัดรัด) */
         .workflow-box {
             background: linear-gradient(180deg, #ffffff 0%, #fff7ed 100%);
             border: 1px solid #fed7aa;
-            border-radius: 16px;
-            padding: 18px 20px;
+            border-radius: 14px;
+            padding: 14px 16px;
         }
 
         .workflow-header {
             text-align: center;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .workflow-header h3 {
-            font-size: 16.5px;
+            font-size: 15.5px;
             font-weight: 700;
             color: #1e293b;
         }
 
         .workflow-header p {
-            font-size: 12px;
+            font-size: 11.5px;
             color: #64748b;
-            margin-top: 2px;
+            margin-top: 1px;
         }
 
         .workflow-steps {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
+            gap: 10px;
         }
 
         .step-item {
             background: #ffffff;
             border: 1px solid #ffedd5;
-            border-radius: 12px;
-            padding: 14px 10px;
+            border-radius: 10px;
+            padding: 10px 8px;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
         }
 
         .step-num {
-            width: 30px;
-            height: 30px;
+            width: 26px;
+            height: 26px;
             background: #ea580c;
             color: #ffffff;
             font-weight: 700;
-            font-size: 13.5px;
+            font-size: 12.5px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 8px auto;
+            margin: 0 auto 6px auto;
         }
 
         .step-title {
-            font-size: 13.5px;
+            font-size: 13px;
             font-weight: 700;
             color: #1e293b;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .step-desc {
-            font-size: 11.5px;
+            font-size: 11px;
             color: #64748b;
-            line-height: 1.4;
+            line-height: 1.35;
         }
 
         /* รองรับหน้าจอ Tablet / iPad (2 คอลัมน์) */
@@ -344,16 +342,9 @@
             .section-header {
                 padding: 10px 12px;
             }
-            .section-title {
-                font-size: 15.5px;
-            }
-            .section-subtitle {
-                font-size: 11px;
-            }
             .btn-view-all {
                 width: 100%;
                 justify-content: center;
-                padding: 6px 12px;
             }
             .feed-container-6 {
                 grid-template-columns: 1fr;
@@ -361,21 +352,18 @@
             }
             .news-card-6 {
                 height: auto;
-                min-height: 360px;
-            }
-            .card-img-wrapper {
-                height: 220px;
+                min-height: 270px;
             }
             .workflow-steps {
                 grid-template-columns: 1fr;
-                gap: 10px;
+                gap: 8px;
             }
             .step-item {
                 display: flex;
                 align-items: center;
                 text-align: left;
-                gap: 12px;
-                padding: 12px 14px;
+                gap: 10px;
+                padding: 10px 12px;
             }
             .step-num {
                 margin: 0;
@@ -402,7 +390,7 @@
         </a>
     </div>
 
-    <!-- 2. ตารางแสดงการ์ดข่าว 6 ช่อง -->
+    <!-- 2. ตารางแสดงการ์ดข่าว 6 ช่อง (กะทัดรัด) -->
     <div class="feed-container-6" id="feed-container"></div>
 
     <!-- 3. แถบขั้นตอนการขอใช้บริการ 4 ขั้นตอน -->
@@ -448,7 +436,7 @@
         const defaultFallbackImg = 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&auto=format&fit=crop&q=80';
 
         function formatFullThaiDate(dateInput) {
-            if (!dateInput) return 'ข่าวประชาสัมพันธ์ล่าสุด';
+            if (!dateInput) return 'ข่าวล่าสุด';
             const d = new Date(dateInput);
             if (isNaN(d.getTime())) return dateInput;
             return d.toLocaleDateString('th-TH', {
@@ -487,14 +475,10 @@
               <div class="card-img-wrapper">
                 <img class="card-img" src="${imgSrc}" referrerpolicy="no-referrer" alt="Card Image"
                      onerror="if(!this.dataset.triedLive && '${liveFallback}' !== '${defaultFallbackImg}'){this.dataset.triedLive='1';this.src='${liveFallback}';}else{this.onerror=null;this.src='${defaultFallbackImg}';}">
+                <span class="author-date-badge">📅 ${fullDateStr}</span>
               </div>
               <div class="card-content">
-                <div>
-                  <div class="author-info">
-                    <span class="author-date">📅 ${fullDateStr}</span>
-                  </div>
-                  <p class="card-text">${post.description}</p>
-                </div>
+                <p class="card-text">${post.description}</p>
                 <div>
                   <span class="read-more">อ่านรายละเอียดเพิ่มเติม ➔</span>
                 </div>
@@ -509,11 +493,10 @@
               <div>
                 <span class="promo-badge">✨ OFFICIAL PAGE</span>
                 <h3 class="promo-title">ศูนย์บริการวิชาการด้านวิทยาศาสตร์และเทคโนโลยี</h3>
-                <p class="promo-desc">คณะวิทยาศาสตร์ มหาวิทยาลัยแม่โจ้ ให้บริการวิเคราะห์ทดสอบและเครื่องมือวิทยาศาสตร์ขั้นสูงเพื่องานวิจัยและการศึกษา</p>
+                <p class="promo-desc">คณะวิทยาศาสตร์ มหาวิทยาลัยแม่โจ้ ให้บริการวิเคราะห์ทดสอบและเครื่องมือวิทยาศาสตร์ขั้นสูง</p>
                 <div class="promo-info-box">
                   📍 อาคารจุฬาภรณ์ คณะวิทยาศาสตร์<br>
-                  ⏰ จันทร์ - ศุกร์ (08:30 - 16:30 น.)<br>
-                  ☎️ โทร. 053-873000
+                  ⏰ จันทร์ - ศุกร์ (08:30 - 16:30 น.) | ☎️ 053-873000
                 </div>
               </div>
               <div class="promo-btn">
