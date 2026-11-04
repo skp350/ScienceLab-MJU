@@ -112,7 +112,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 320px;
+            height: 350px;
             text-decoration: none;
             color: inherit;
             transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
@@ -124,21 +124,21 @@
             box-shadow: 0 10px 18px rgba(234, 88, 12, 0.14);
         }
 
-        /* กรอบรูปภาพ: เต็มความกว้างของการ์ด 100% */
+        /* กรอบรูปภาพ */
         .card-img-wrapper {
             width: 100%;
-            height: 190px;
+            height: 225px;
             background: #f8fafc;
             overflow: hidden;
             position: relative;
         }
 
-        /* รูปเต็มการ์ดด้านซ้าย-ขวา และ Crop ตรงกลางของรูป (ตัดบน-ล่างออกเท่ากัน) */
+        /* เต็มความกว้างการ์ด + โฟกัสส่วนบนถึงกลาง (top 12%) ป้องกันหัวคนถูกตัด */
         .card-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center center;
+            object-position: center 12%;
             display: block;
             transition: transform 0.35s ease;
         }
@@ -193,12 +193,12 @@
             display: inline-block;
         }
 
-        /* การ์ดพิเศษช่องที่ 6 */
+        /* การ์ดพิเศษช่องที่ 6 (ล็อกอยู่ประจำช่องที่ 6 เสมอ) */
         .promo-card-6 {
             background: linear-gradient(145deg, #ea580c 0%, #c2410c 100%);
             color: #ffffff;
             border: none;
-            padding: 20px 18px;
+            padding: 22px 18px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -211,7 +211,7 @@
             position: absolute;
             right: -10px;
             bottom: -15px;
-            font-size: 105px;
+            font-size: 110px;
             opacity: 0.12;
             pointer-events: none;
         }
@@ -224,12 +224,12 @@
             font-weight: 700;
             padding: 3px 10px;
             border-radius: 20px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             width: fit-content;
         }
 
         .promo-title {
-            font-size: 16.5px;
+            font-size: 17px;
             font-weight: 800;
             line-height: 1.35;
             margin-bottom: 8px;
@@ -239,17 +239,17 @@
             font-size: 12px;
             color: #ffedd5;
             line-height: 1.5;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .promo-info-box {
             background: rgba(0, 0, 0, 0.18);
             border-radius: 8px;
-            padding: 8px 10px;
+            padding: 10px 12px;
             font-size: 11.5px;
             color: #fff7ed;
-            line-height: 1.5;
-            margin-bottom: 10px;
+            line-height: 1.55;
+            margin-bottom: 12px;
         }
 
         .promo-btn {
@@ -258,7 +258,7 @@
             font-size: 12px;
             font-weight: 700;
             text-align: center;
-            padding: 8px 12px;
+            padding: 9px 12px;
             border-radius: 8px;
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
             transition: all 0.2s;
@@ -286,7 +286,7 @@
             }
             .news-card-6 {
                 height: auto;
-                min-height: 300px;
+                min-height: 320px;
             }
         }
     </style>
@@ -341,7 +341,8 @@
         }
 
         function renderFeeds(items) {
-            const posts = (items || []).slice(0, 6);
+            // ดึง 5 ข่าวล่าสุดมาแสดงในช่องที่ 1-5 (และช่องที่ 6 เป็นกล่องเวลาทำการและข้อมูลศูนย์ฯ เสมอ)
+            const posts = (items || []).slice(0, 5);
             const container = document.getElementById('feed-container');
             container.innerHTML = '';
 
@@ -368,8 +369,8 @@
           `;
             });
 
-            if (posts.length < 6) {
-                container.innerHTML += `
+            // ช่องที่ 6: ล็อกการ์ดข้อมูลศูนย์ฯ และเวลาทำการไว้ตลอดเวลา (ไม่หายไปเมื่อมีโพสต์ใหม่)
+            container.innerHTML += `
             <a href="${fbPageUrl}" target="_blank" class="news-card-6 promo-card-6">
               <div>
                 <span class="promo-badge">✨ OFFICIAL PAGE</span>
@@ -386,7 +387,6 @@
               </div>
             </a>
           `;
-            }
         }
 
         fetch('posts.json?t=' + Date.now())
