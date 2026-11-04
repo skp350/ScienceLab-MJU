@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
-    <title>ข่าวประชาสัมพันธ์และขั้นตอนการรับบริการ - ศูนย์บริการวิชาการฯ คณะวิทยาศาสตร์ ม.แม่โจ้</title>
+    <title>ข่าวประชาสัมพันธ์ - ศูนย์บริการวิชาการฯ คณะวิทยาศาสตร์ ม.แม่โจ้</title>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap');
@@ -19,12 +19,12 @@
 
         body {
             background-color: transparent;
-            padding: 2px 2px 8px 2px;
+            padding: 2px 2px 6px 2px;
             margin: 0;
             overflow-x: hidden;
         }
 
-        /* 1. แถบหัวข้อข่าวประชาสัมพันธ์ (กะทัดรัดขึ้น) */
+        /* 1. แถบหัวข้อข่าวประชาสัมพันธ์ */
         .section-header {
             display: flex;
             align-items: center;
@@ -94,13 +94,12 @@
             border-color: #ea580c;
         }
 
-        /* 2. ตารางการ์ดข่าว 6 ช่อง (ย่อขนาดความสูงลง 35%) */
+        /* 2. ตารางการ์ดข่าว 6 ช่อง */
         .feed-container-6 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 14px;
             width: 100%;
-            margin-bottom: 18px;
         }
 
         .news-card-6 {
@@ -113,7 +112,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 285px; /* ย่อลงจาก 430px เหลือ 285px กะทัดรัดพอดีตา */
+            height: 330px;
             text-decoration: none;
             color: inherit;
             transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
@@ -125,29 +124,48 @@
             box-shadow: 0 10px 18px rgba(234, 88, 12, 0.14);
         }
 
+        /* กรอบรูปภาพ: จัดกึ่งกลางเป๊ะ + พื้นหลังเบลอรองรับรูปทุกสัดส่วนไม่ให้โดนตัดขาด */
         .card-img-wrapper {
             width: 100%;
-            height: 155px; /* ย่อความสูงรูปจาก 260px เหลือ 155px (ทรง 16:9 สวยงาม) */
+            height: 200px;
             background: #fff7ed;
             overflow: hidden;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
+        /* พื้นหลังเบลอเติมเต็มด้านข้างกรณีรูปเป็นแนวตั้ง/จัตุรัส */
+        .card-img-blur-bg {
+            position: absolute;
+            inset: -10px;
+            background-size: cover;
+            background-position: center center;
+            filter: blur(12px) brightness(0.92);
+            opacity: 0.45;
+            z-index: 1;
+        }
+
+        /* รูปหลักแสดงเต็มตรงกลาง (contain / center) ไม่ตัดหัว ไม่ตัดข้อความ */
         .card-img {
+            position: relative;
+            z-index: 2;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            object-position: center 20%;
+            object-fit: contain;
+            object-position: center center;
             transition: transform 0.35s ease;
         }
 
         .news-card-6:hover .card-img {
-            transform: scale(1.04);
+            transform: scale(1.03);
         }
 
-        /* ป้ายวันที่สีส้ม วางซ้อนมุมขวาล่างของรูปเพื่อประหยัดพื้นที่ */
+        /* ป้ายวันที่สีส้ม */
         .author-date-badge {
             position: absolute;
+            z-index: 3;
             bottom: 8px;
             right: 8px;
             display: inline-flex;
@@ -169,6 +187,8 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            background: #ffffff;
+            z-index: 3;
         }
 
         .card-text {
@@ -176,7 +196,7 @@
             color: #334155;
             line-height: 1.48;
             display: -webkit-box;
-            -webkit-line-clamp: 3; /* แสดง 3 บรรทัดกระชับ */
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
             margin-bottom: 4px;
@@ -189,12 +209,12 @@
             display: inline-block;
         }
 
-        /* การ์ดพิเศษช่องที่ 6 (ปรับขนาดความสูง 285px เท่ากันเป๊ะ) */
+        /* การ์ดพิเศษช่องที่ 6 */
         .promo-card-6 {
             background: linear-gradient(145deg, #ea580c 0%, #c2410c 100%);
             color: #ffffff;
             border: none;
-            padding: 16px 18px;
+            padding: 20px 18px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -207,7 +227,7 @@
             position: absolute;
             right: -10px;
             bottom: -15px;
-            font-size: 95px;
+            font-size: 105px;
             opacity: 0.12;
             pointer-events: none;
         }
@@ -218,121 +238,51 @@
             color: #ffffff;
             font-size: 10px;
             font-weight: 700;
-            padding: 2.5px 10px;
+            padding: 3px 10px;
             border-radius: 20px;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             width: fit-content;
         }
 
         .promo-title {
-            font-size: 15.5px;
+            font-size: 16.5px;
             font-weight: 800;
-            line-height: 1.3;
-            margin-bottom: 6px;
+            line-height: 1.35;
+            margin-bottom: 8px;
         }
 
         .promo-desc {
-            font-size: 11.5px;
+            font-size: 12px;
             color: #ffedd5;
-            line-height: 1.45;
-            margin-bottom: 8px;
+            line-height: 1.5;
+            margin-bottom: 10px;
         }
 
         .promo-info-box {
             background: rgba(0, 0, 0, 0.18);
             border-radius: 8px;
-            padding: 7px 10px;
-            font-size: 11px;
+            padding: 8px 10px;
+            font-size: 11.5px;
             color: #fff7ed;
-            line-height: 1.45;
-            margin-bottom: 8px;
+            line-height: 1.5;
+            margin-bottom: 10px;
         }
 
         .promo-btn {
             background: #ffffff;
             color: #ea580c;
-            font-size: 11.5px;
+            font-size: 12px;
             font-weight: 700;
             text-align: center;
-            padding: 7px 12px;
+            padding: 8px 12px;
             border-radius: 8px;
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
             transition: all 0.2s;
         }
 
-        /* 3. แถบขั้นตอนการขอรับบริการ 4 ขั้นตอน (กะทัดรัด) */
-        .workflow-box {
-            background: linear-gradient(180deg, #ffffff 0%, #fff7ed 100%);
-            border: 1px solid #fed7aa;
-            border-radius: 14px;
-            padding: 14px 16px;
-        }
-
-        .workflow-header {
-            text-align: center;
-            margin-bottom: 12px;
-        }
-
-        .workflow-header h3 {
-            font-size: 15.5px;
-            font-weight: 700;
-            color: #1e293b;
-        }
-
-        .workflow-header p {
-            font-size: 11.5px;
-            color: #64748b;
-            margin-top: 1px;
-        }
-
-        .workflow-steps {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-
-        .step-item {
-            background: #ffffff;
-            border: 1px solid #ffedd5;
-            border-radius: 10px;
-            padding: 10px 8px;
-            text-align: center;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-        }
-
-        .step-num {
-            width: 26px;
-            height: 26px;
-            background: #ea580c;
-            color: #ffffff;
-            font-weight: 700;
-            font-size: 12.5px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 6px auto;
-        }
-
-        .step-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 2px;
-        }
-
-        .step-desc {
-            font-size: 11px;
-            color: #64748b;
-            line-height: 1.35;
-        }
-
         /* รองรับหน้าจอ Tablet / iPad (2 คอลัมน์) */
         @media (max-width: 900px) {
             .feed-container-6 {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .workflow-steps {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
@@ -352,22 +302,7 @@
             }
             .news-card-6 {
                 height: auto;
-                min-height: 270px;
-            }
-            .workflow-steps {
-                grid-template-columns: 1fr;
-                gap: 8px;
-            }
-            .step-item {
-                display: flex;
-                align-items: center;
-                text-align: left;
-                gap: 10px;
-                padding: 10px 12px;
-            }
-            .step-num {
-                margin: 0;
-                flex-shrink: 0;
+                min-height: 310px;
             }
         }
     </style>
@@ -390,46 +325,8 @@
         </a>
     </div>
 
-    <!-- 2. ตารางแสดงการ์ดข่าว 6 ช่อง (กะทัดรัด) -->
+    <!-- 2. ตารางแสดงการ์ดข่าว 6 ช่อง -->
     <div class="feed-container-6" id="feed-container"></div>
-
-    <!-- 3. แถบขั้นตอนการขอใช้บริการ 4 ขั้นตอน -->
-    <div class="workflow-box">
-        <div class="workflow-header">
-            <h3>⚡ ขั้นตอนการขอรับบริการเครื่องมือวิทยาศาสตร์ (Service Workflow)</h3>
-            <p>สะดวก รวดเร็ว ผ่านระบบบริหารจัดการออนไลน์ตลอด 24 ชั่วโมง</p>
-        </div>
-        <div class="workflow-steps">
-            <div class="step-item">
-                <div class="step-num">1</div>
-                <div>
-                    <div class="step-title">ค้นหาเครื่องมือ</div>
-                    <div class="step-desc">ตรวจสอบรายการเครื่องมือและอัตราค่าบริการในแคตตาล็อก</div>
-                </div>
-            </div>
-            <div class="step-item">
-                <div class="step-num">2</div>
-                <div>
-                    <div class="step-title">ยื่นคำขอออนไลน์</div>
-                    <div class="step-desc">กรอกแบบฟอร์มคำขอใช้บริการและเลือกวันเวลาที่ต้องการ</div>
-                </div>
-            </div>
-            <div class="step-item">
-                <div class="step-num">3</div>
-                <div>
-                    <div class="step-title">ส่งตัวอย่าง / ใช้งาน</div>
-                    <div class="step-desc">นำส่งตัวอย่างวิเคราะห์หรือเข้าใช้งานเครื่องมือตามนัดหมาย</div>
-                </div>
-            </div>
-            <div class="step-item">
-                <div class="step-num">4</div>
-                <div>
-                    <div class="step-title">ชำระเงินและรับผล</div>
-                    <div class="step-desc">ชำระค่าธรรมเนียมและติดตามรับผลการวิเคราะห์</div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script>
         const fbPageUrl = 'https://www.facebook.com/ScienceAcademicServiceMJU';
@@ -473,6 +370,7 @@
                 container.innerHTML += `
             <a href="${targetLink}" target="_blank" class="news-card-6">
               <div class="card-img-wrapper">
+                <div class="card-img-blur-bg" style="background-image: url('${imgSrc}');"></div>
                 <img class="card-img" src="${imgSrc}" referrerpolicy="no-referrer" alt="Card Image"
                      onerror="if(!this.dataset.triedLive && '${liveFallback}' !== '${defaultFallbackImg}'){this.dataset.triedLive='1';this.src='${liveFallback}';}else{this.onerror=null;this.src='${defaultFallbackImg}';}">
                 <span class="author-date-badge">📅 ${fullDateStr}</span>
@@ -493,10 +391,11 @@
               <div>
                 <span class="promo-badge">✨ OFFICIAL PAGE</span>
                 <h3 class="promo-title">ศูนย์บริการวิชาการด้านวิทยาศาสตร์และเทคโนโลยี</h3>
-                <p class="promo-desc">คณะวิทยาศาสตร์ มหาวิทยาลัยแม่โจ้ ให้บริการวิเคราะห์ทดสอบและเครื่องมือวิทยาศาสตร์ขั้นสูง</p>
+                <p class="promo-desc">คณะวิทยาศาสตร์ มหาวิทยาลัยแม่โจ้ ให้บริการวิเคราะห์ทดสอบและเครื่องมือวิทยาศาสตร์ขั้นสูงเพื่องานวิจัยและการศึกษา</p>
                 <div class="promo-info-box">
                   📍 อาคารจุฬาภรณ์ คณะวิทยาศาสตร์<br>
-                  ⏰ จันทร์ - ศุกร์ (08:30 - 16:30 น.) | ☎️ 053-873000
+                  ⏰ จันทร์ - ศุกร์ (08:30 - 16:30 น.)<br>
+                  ☎️ โทร. 053-873000
                 </div>
               </div>
               <div class="promo-btn">
