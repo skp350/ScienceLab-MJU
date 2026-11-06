@@ -43,6 +43,19 @@
             line-height: 1.2;
         }
 
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .swipe-hint {
+            display: none;
+            font-size: 11px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
         .btn-view-all {
             display: inline-flex;
             align-items: center;
@@ -64,7 +77,7 @@
             border-color: #ea580c;
         }
 
-        /* 2. ตารางการ์ด 6 ข่าว เรียงแถวเดียว (6 คอลัมน์) */
+        /* 2. ตารางการ์ด 6 ข่าว เรียงแถวเดียว (ความสูงเท่ากันทุกอุปกรณ์ ไม่ตกขอบ!) */
         .feed-container-6-row {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -74,6 +87,7 @@
 
         .news-card-item {
             width: 100%;
+            height: 295px; /* ล็อกความสูงคงที่ทุกหน้าจอ ไม่ให้ล้น Iframe */
             background: #ffffff;
             border: 1px solid #fed7aa;
             border-radius: 10px;
@@ -93,20 +107,20 @@
             box-shadow: 0 8px 15px rgba(234, 88, 12, 0.14);
         }
 
-        /* กรอบรูปจัตุรัส ขนาดเล็กกะทัดรัดตามความกว้างของ 1 ใน 6 คอลัมน์ */
         .card-img-wrapper {
             width: 100%;
-            aspect-ratio: 1 / 1;
+            height: 190px;
             background: #fff7ed;
             overflow: hidden;
             position: relative;
+            flex-shrink: 0;
         }
 
         .card-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center top;
+            object-position: center 15%;
             display: block;
             transition: transform 0.3s ease;
         }
@@ -115,7 +129,6 @@
             transform: scale(1.04);
         }
 
-        /* ป้ายวันที่สีส้ม (ไม่มีไอคอน) */
         .author-date-badge {
             position: absolute;
             z-index: 3;
@@ -136,7 +149,6 @@
             flex-direction: column;
             justify-content: space-between;
             background: #ffffff;
-            min-height: 92px;
         }
 
         .card-text {
@@ -147,7 +159,7 @@
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .read-more {
@@ -157,44 +169,62 @@
             display: inline-block;
         }
 
-        /* การ์ดช่องที่ 6 กรณีมี 5 ข่าว */
+        /* การ์ดช่องที่ 6 โทนขาว-ส้ม-เขียวแม่โจ้ */
         .promo-card-compact {
-            background: linear-gradient(145deg, #ea580c 0%, #c2410c 100%);
-            color: #ffffff;
-            border: none;
-            padding: 12px;
+            background: linear-gradient(180deg, #fff7ed 0%, #ffffff 100%);
+            border: 1px solid #fdba74;
+            border-top: 4px solid #006837;
+            padding: 12px 11px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        .promo-title {
-            font-size: 13px;
+        .promo-tag {
+            display: inline-block;
+            font-size: 9.5px;
             font-weight: 700;
-            line-height: 1.35;
-            margin-bottom: 6px;
+            color: #006837;
+            background: #dcfce7;
+            padding: 2px 7px;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            width: fit-content;
+        }
+
+        .promo-title {
+            font-size: 12.5px;
+            font-weight: 800;
+            color: #1e293b;
+            line-height: 1.3;
+            margin-bottom: 3px;
         }
 
         .promo-desc {
             font-size: 10.5px;
-            color: #ffedd5;
-            line-height: 1.4;
-            margin-bottom: 8px;
+            color: #ea580c;
+            font-weight: 700;
+            margin-bottom: 6px;
         }
 
         .promo-info {
-            background: rgba(0, 0, 0, 0.18);
-            border-radius: 6px;
+            background: #ffffff;
+            border: 1px solid #fed7aa;
+            border-radius: 8px;
             padding: 6px 8px;
             font-size: 10px;
-            color: #fff7ed;
-            line-height: 1.45;
-            margin-bottom: 8px;
+            color: #334155;
+            line-height: 1.48;
+            margin-bottom: 6px;
+        }
+
+        .promo-info strong {
+            color: #006837;
         }
 
         .promo-btn {
-            background: #ffffff;
-            color: #ea580c;
+            background: linear-gradient(90deg, #ea580c, #f97316);
+            color: #ffffff;
             font-size: 10.5px;
             font-weight: 700;
             text-align: center;
@@ -202,18 +232,31 @@
             border-radius: 6px;
         }
 
-        /* รองรับหน้าจอ Tablet (3 คอลัมน์) */
+        /* บนมือถือและแท็บเล็ต: ให้เรียงแถวเดียวและใช้นิ้วเลื่อนซ้าย-ขวาได้ (ไม่ตกลงมาข้างล่างจนโดนตัดขอบ!) */
         @media (max-width: 1024px) {
-            .feed-container-6-row {
-                grid-template-columns: repeat(3, 1fr);
+            .swipe-hint {
+                display: inline-block;
             }
-        }
-
-        /* รองรับหน้าจอมือถือ (2 คอลัมน์กะทัดรัด) */
-        @media (max-width: 600px) {
             .feed-container-6-row {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                gap: 10px;
+                padding-bottom: 6px;
+            }
+            .feed-container-6-row::-webkit-scrollbar {
+                height: 4px;
+            }
+            .feed-container-6-row::-webkit-scrollbar-thumb {
+                background: #fdba74;
+                border-radius: 4px;
+            }
+            .news-card-item {
+                flex: 0 0 210px;
+                scroll-snap-align: start;
+                height: 290px;
             }
         }
     </style>
@@ -221,13 +264,16 @@
 
 <body>
 
-    <!-- 1. หัวข้อ ไฮไลท์ (ไม่มีไอคอน) -->
+    <!-- 1. หัวข้อ ไฮไลท์ -->
     <div class="section-header">
         <h2 class="section-title">ไฮไลท์</h2>
-        <a href="https://www.facebook.com/ScienceAcademicServiceMJU" target="_blank" class="btn-view-all">
-            <span>ดูทั้งหมด</span>
-            <span>➔</span>
-        </a>
+        <div class="header-right">
+            <span class="swipe-hint">เลื่อนดู ➔</span>
+            <a href="https://www.facebook.com/ScienceAcademicServiceMJU" target="_blank" class="btn-view-all">
+                <span>ดูทั้งหมด</span>
+                <span>➔</span>
+            </a>
+        </div>
     </div>
 
     <!-- 2. ตารางแสดงการ์ด 6 ข่าว เรียงแถวเดียว -->
@@ -262,7 +308,7 @@
         }
 
         function renderFeeds(items) {
-            const posts = (items || []).slice(0, 6);
+            const posts = (items || []).slice(0, 5);
             const container = document.getElementById('feed-container');
             container.innerHTML = '';
 
@@ -289,24 +335,25 @@
           `;
             });
 
-            if (posts.length < 6) {
-                container.innerHTML += `
+            // ช่องที่ 6: ข้อมูลตรงตาม Footer ของเว็บ (ชั้น 1 อาคารแม่โจ้ 60 ปี | โทร. 053-873-812 | LINE: @efn4994d)
+            container.innerHTML += `
             <a href="${fbPageUrl}" target="_blank" class="news-card-item promo-card-compact">
               <div>
+                <span class="promo-tag">ข้อมูลติดต่อศูนย์ฯ</span>
                 <h3 class="promo-title">ศูนย์บริการวิชาการด้านวิทยาศาสตร์และเทคโนโลยี</h3>
-                <p class="promo-desc">คณะวิทยาศาสตร์ มหาวิทยาลัยแม่โจ้</p>
+                <p class="promo-desc">คณะวิทยาศาสตร์ ม.แม่โจ้</p>
                 <div class="promo-info">
-                  อาคารจุฬาภรณ์ คณะวิทยาศาสตร์<br>
-                  จันทร์ - ศุกร์ (08:30 - 16:30 น.)<br>
-                  โทร. 053-873000
+                  <strong>สถานที่ตั้ง:</strong> ชั้น 1 อาคารแม่โจ้ 60 ปี<br>
+                  <strong>เวลาทำการ:</strong> จ.-ศ. (08:30-16:30 น.)<br>
+                  <strong>โทร:</strong> 053-873-812<br>
+                  <strong>LINE ID:</strong> @efn4994d
                 </div>
               </div>
               <div class="promo-btn">
-                เพจ Facebook ➔
+                ติดตามเพจ Facebook ➔
               </div>
             </a>
           `;
-            }
         }
 
         fetch('posts.json?t=' + Date.now())
